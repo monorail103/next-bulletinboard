@@ -3,19 +3,34 @@
 import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
 
-export const GET = async (req: NextRequest) => {
+
+export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const { id } = await params;
+
     try {
+
+        if (!id) {
+            return NextResponse.json(
+            { error: "IDが指定されていません" },
+            { status: 400 }
+            );
+        }
+
+        if (!id) {
+            return NextResponse.json({ error: "Missing thread ID" }, { status: 400 });
+        }
+
         const posts = await prisma.post.findMany({
             where: {
-                ThreadId: new URL(req.url).searchParams.get('id') as string
+                ThreadId: id
             },
             orderBy: {
                 createdAt: 'asc'
             }
         });
+
         return NextResponse.json(posts);
-    }
-    catch (e) {
+    } catch (e) {
         return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 });
     }
-}
+};
