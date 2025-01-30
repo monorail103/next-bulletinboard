@@ -26,6 +26,12 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
             },
             orderBy: {
                 createdAt: 'asc'
+            },
+            select: {
+                id: true,
+                content: true,
+                username: true,
+                createdAt: true
             }
         });
 

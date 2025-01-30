@@ -39,7 +39,6 @@ export default function ThreadPage() {
       ) :
       posts.map((post) => (
       <div key={post.id} className="bg-white rounded-lg p-5 mb-5 shadow-md transition-transform transform hover:-translate-y-1">
-        <h2 className="text-2xl text-blue-500 mb-3">{post.title}</h2>
         <p className="text-gray-700">投稿者: {post.username}</p>
         <p className="text-gray-700">投稿日: {new Date(post.createdAt).toLocaleString()}</p>
         <p className="text-gray-700">{post.content}</p>
