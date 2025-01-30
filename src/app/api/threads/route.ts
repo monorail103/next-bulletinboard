@@ -7,7 +7,8 @@ export const GET = async (req: NextRequest) => {
         const threads = await prisma.thread.findMany({
             orderBy: {
                 createdAt: 'desc'
-            }
+            },
+
         });
         return NextResponse.json(threads);
     }

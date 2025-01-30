@@ -22,8 +22,7 @@ export const POST = async (req: NextRequest, { params }: { params: { id: string 
         }
 
         const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for") || "";
-        const date = new Date().toISOString().split('T')[0];
-        const username = generateId(ip, date);
+        const username = generateId(ip);
 
         const post = await prisma.post.create({
             data: {

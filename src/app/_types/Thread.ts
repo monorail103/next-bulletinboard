@@ -4,4 +4,5 @@ export type Thread = {
     createdAt: Date;
     ipaddress: string;
     isActive: boolean;
+    good: number;
 }

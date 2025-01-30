@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest) => {
         });
 
         // ユーザー名を生成
-        const username = generateId(ip, new Date().toISOString().split('T')[0]);
+        const username = generateId(ip);
 
         // 投稿を作成
         const post = await prisma.post.create({

@@ -19,6 +19,7 @@ model Thread {
   createdAt DateTime @default(now())
   ipaddress String
   isActive  Boolean  @default(true)
+  good      Int     @default(0)
 }
 
 model Post {
