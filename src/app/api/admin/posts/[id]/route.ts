@@ -1,9 +1,10 @@
 // 投稿を削除する
 import prisma from "@/lib/prisma";
+import { error } from "console";
 import { NextResponse, NextRequest } from "next/server";
 
 export const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const { id } = await params;
+    const { id } = await params; // awaitを削除
     try {
         await prisma.post.delete({
             where: {
@@ -13,6 +14,6 @@ export const DELETE = async (req: NextRequest, { params }: { params: { id: strin
         return NextResponse.json({ message: "Post deleted" });
     }
     catch (e) {
-        return NextResponse.json({ error: "Failed to delete post" }, { status: 500 });
+        return NextResponse.json({error: e}, { status: 500 });
     }
 }

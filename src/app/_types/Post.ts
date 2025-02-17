@@ -1,7 +1,7 @@
 export type Post = {
     id: number;
     content: string;
-    ThreadId: String;
+    ThreadId: string;
     username: string;
     createdAt: Date;
     ipaddress: string;

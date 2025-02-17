@@ -19,6 +19,6 @@ export const PUT = async (req: NextRequest, { params }: { params: { id: string }
         return NextResponse.json(thread);
     }
     catch (e) {
-        return NextResponse.json({ error: "Failed to like thread" }, { status: 500 });
+        return NextResponse.json({ error: e }, { status: 500 });
     }
 }

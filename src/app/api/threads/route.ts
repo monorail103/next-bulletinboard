@@ -17,6 +17,6 @@ export const GET = async (req: NextRequest) => {
         return NextResponse.json(threads);
     }
     catch (e) {
-        return NextResponse.json({ error: "Failed to fetch threads" }, { status: 500 });
+        return NextResponse.json({ error: e }, { status: 500 });
     }
 }

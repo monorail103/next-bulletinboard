@@ -36,6 +36,6 @@ export const POST = async (req: NextRequest, { params }: { params: { id: string 
         return NextResponse.json(post);
     } catch (e) {
         console.log(content);
-        return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
+        return NextResponse.json({ error: e }, { status: 500 });
     }
 }

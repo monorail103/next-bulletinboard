@@ -37,6 +37,6 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
 
         return NextResponse.json(posts);
     } catch (e) {
-        return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 });
+        return NextResponse.json({ error: e }, { status: 500 });
     }
 };

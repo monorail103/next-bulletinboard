@@ -14,6 +14,6 @@ export const DELETE = async (req: NextRequest, { params }: { params: { id: strin
         return NextResponse.json({ message: "Tag deleted" });
     }
     catch (e) {
-        return NextResponse.json({ error: "Failed to delete tag" }, { status: 500 });
+        return NextResponse.json({ error: e }, { status: 500 });
     }
 };
