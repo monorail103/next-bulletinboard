@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Thread {
@@ -19,7 +20,8 @@ model Thread {
   createdAt DateTime @default(now())
   ipaddress String
   isActive  Boolean  @default(true)
-  good      Int     @default(0)
+  good      Int      @default(0)
+  tags      Tag[]    @relation("ThreadTags")
 }
 
 model Post {
@@ -29,4 +31,10 @@ model Post {
   username  String
   createdAt DateTime @default(now())
   ipaddress String
+}
+
+model Tag {
+  id    String   @id @default(uuid())
+  name  String   @unique
+  threads Thread[] @relation("ThreadTags")
 }

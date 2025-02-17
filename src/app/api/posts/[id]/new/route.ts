@@ -6,7 +6,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 type RequestBody = {
     content: string;
-  };
+};
 
 export const POST = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { id } = await params;
@@ -35,6 +35,7 @@ export const POST = async (req: NextRequest, { params }: { params: { id: string 
 
         return NextResponse.json(post);
     } catch (e) {
+        console.log(content);
         return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
     }
 }

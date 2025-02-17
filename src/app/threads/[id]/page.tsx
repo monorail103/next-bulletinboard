@@ -2,6 +2,7 @@
 import type { Post } from "@/app/_types/Post";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import { body } from "framer-motion/client";
 
 export default function ThreadPage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -31,7 +32,7 @@ export default function ThreadPage() {
     }
 
     fetchPosts();
-  }, []);
+  }, [id]);
 
   // 投稿を作成する
   const createPost = async (content: string) => {
@@ -41,8 +42,10 @@ export default function ThreadPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ content: content }),
       });
+
+      console.log(JSON.stringify({ content: content }));
 
       if (!res.ok) {
         throw new Error("Failed to create post");
@@ -53,6 +56,8 @@ export default function ThreadPage() {
     } catch (e) {
       console.error(e);
     }
+
+    setNewPostContent("");
   }
 
   return (
@@ -77,22 +82,27 @@ export default function ThreadPage() {
         </div>
       )}
       <div className="mt-6">
-          <form className="space-y-4">
-            <textarea
-              value={newPostContent}
-              onChange={(e) => setNewPostContent(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              rows={4}
-              placeholder="Write your post here..."
-            />
-            <button
-              type="submit"
-              onClick={() => createPost(newPostContent)}
-              className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              Post
-            </button>
-          </form>
+        <form
+          className="space-y-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            createPost(newPostContent);
+          }}
+        >
+          <textarea
+            value={newPostContent}
+            onChange={(e) => setNewPostContent(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows={4}
+            placeholder="Write your post here..."
+          />
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Post
+          </button>
+        </form>
       </div>
     </div>
   );

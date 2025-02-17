@@ -3,47 +3,63 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  // スレッドの作成
-  const thread1 = await prisma.thread.create({
+  // 既存のタグを削除
+  await prisma.tag.deleteMany();
+  await prisma.post.deleteMany();
+  await prisma.thread.deleteMany();
+
+  // タグを作成
+  const tag1 = await prisma.tag.create({
     data: {
-      title: '最初のスレッド',
-      ipaddress: '192.168.1.1',
-      isActive: true,
+      name: 'JavaScript',
     },
   });
 
-  // スレッドに関連する書き込みの作成
+  const tag2 = await prisma.tag.create({
+    data: {
+      name: 'TypeScript',
+    },
+  });
+
+  // スレッドを作成
+  const thread = await prisma.thread.create({
+    data: {
+      title: 'テストスレッド1',
+      ipaddress: '127.0.0.1',
+      tags: {
+        connect: [
+          { id: tag1.id },
+          { id: tag2.id },
+        ],
+      },
+    },
+  });
+
+
+  // 投稿を作成
   await prisma.post.create({
     data: {
-      content: '最初の書き込み',
-      ThreadId: thread1.id,
-      username: 'ユーザー1',
-      ipaddress: '192.168.1.1',
-    },
-  });
-
-  const thread2 = await prisma.thread.create({
-    data: {
-      title: '二番目のスレッド',
-      ipaddress: '192.168.1.2',
-      isActive: true,
+      content: 'テスト投稿1',
+      ThreadId: thread.id,
+      username: 'testuser',
+      ipaddress: '127.0.0.1',
     },
   });
 
   await prisma.post.create({
     data: {
-      content: '二番目のスレッドの最初の書き込み',
-      ThreadId: thread2.id,
-      username: 'ユーザー2',
-      ipaddress: '192.168.1.2',
+      content: 'テスト投稿2',
+      ThreadId: thread.id,
+      username: 'testuser',
+      ipaddress: '127.0.0.1',
     },
   });
+
 }
 
 main()
   .catch((e) => {
-    console.error(e);
-    process.exit(1);
+    throw e;
   })
   .finally(async () => {
     await prisma.$disconnect();

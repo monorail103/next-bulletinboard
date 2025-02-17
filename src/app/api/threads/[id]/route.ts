@@ -15,6 +15,7 @@ export const PUT = async (req: NextRequest, { params }: { params: { id: string }
                 }
             }
         });
+
         return NextResponse.json(thread);
     }
     catch (e) {
