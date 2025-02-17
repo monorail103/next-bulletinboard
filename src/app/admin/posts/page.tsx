@@ -29,7 +29,7 @@ export default function Page() {
                 const data = await res.json();
                 setPosts(data);
             } catch (err) {
-                setError('Failed to fetch posts');
+                setError((err as Error).message);
             } finally {
                 setLoading(false);
             }
@@ -54,7 +54,7 @@ export default function Page() {
                 const data = await res.json();
                 setThreads(data);
             } catch (err) {
-                setError('Failed to fetch threads');
+                setError((err as Error).message);
             } finally {
                 setLoading(false);
             }
@@ -81,7 +81,7 @@ export default function Page() {
                 throw new Error('Failed to delete post');
             }
         } catch (err) {
-            setError('Failed to delete post');
+            setError((err as Error).message);
         } finally {
             setLoading(false);
         }

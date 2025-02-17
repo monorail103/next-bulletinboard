@@ -1,6 +1,5 @@
 // 投稿を削除する
 import prisma from "@/lib/prisma";
-import { error } from "console";
 import { NextResponse, NextRequest } from "next/server";
 
 export const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {

@@ -2,7 +2,6 @@
 import type { Post } from "@/app/_types/Post";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { body } from "framer-motion/client";
 
 export default function ThreadPage() {
   const [posts, setPosts] = useState<Post[]>([]);

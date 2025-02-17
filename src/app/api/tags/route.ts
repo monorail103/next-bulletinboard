@@ -1,9 +1,8 @@
 // タグをすべて取得する
 import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
-import { Server } from "socket.io";
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
     try {
         const tags = await prisma.tag.findMany({
             orderBy: {

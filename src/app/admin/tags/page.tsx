@@ -27,7 +27,7 @@ export default function Page() {
                 const data = await res.json();
                 setTags(data);
             } catch (err) {
-                setError('Failed to fetch tags');
+                setError((err as Error).message);
             } finally {
                 setLoading(false);
             }
@@ -53,7 +53,7 @@ export default function Page() {
             const data = await res.json();
             setTags([...tags, data]);
         } catch (err) {
-            setError('Failed to add tag');
+            setError((err as Error).message);
         }
     }
 
@@ -72,7 +72,7 @@ export default function Page() {
 
             setTags(tags.filter((tag) => tag.id !== id));
         } catch (err) {
-            setError('Failed to delete tag');
+            setError((err as Error).message);
         }
     }
 

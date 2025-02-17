@@ -2,9 +2,8 @@
 import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
 import { Thread } from "@prisma/client";
-import { Server } from "socket.io";
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
     try {
         const threads: Thread[] = await prisma.thread.findMany({
             orderBy: {

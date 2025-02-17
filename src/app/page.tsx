@@ -212,7 +212,7 @@ export default function Home() {
           </div>
           <button
             type="submit"
-            onClick={(e) => createThread(newThreadTitle, newThreadContent)}
+            onClick={() => createThread(newThreadTitle, newThreadContent)}
             className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 flex items-center justify-center"
           >
             スレッドを作成

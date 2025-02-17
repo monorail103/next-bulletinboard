@@ -26,7 +26,7 @@ const AdminThreadsPage = () => {
                 const data = await res.json();
                 setThreads(data);
             } catch (err) {
-                setError('Failed to fetch threads');
+                setError((err as Error).message);
             } finally {
                 setLoading(false);
             }
@@ -52,7 +52,7 @@ const AdminThreadsPage = () => {
                 throw new Error('Failed to delete thread');
             }
         } catch (err) {
-            setError('Failed to delete thread');
+            setError((err as Error).message);
         } finally {
             setLoading(false);
         }
