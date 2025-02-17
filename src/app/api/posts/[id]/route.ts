@@ -4,8 +4,8 @@ import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
 
 
-export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const { id } = await params;
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+    const id = (await params).id;
 
     try {
 

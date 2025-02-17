@@ -8,8 +8,8 @@ type RequestBody = {
     content: string;
 };
 
-export const POST = async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const { id } = await params;
+export const POST = async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+    const id = (await params).id;
     const { content }: RequestBody = await req.json();
 
     try {

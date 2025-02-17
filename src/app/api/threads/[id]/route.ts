@@ -2,8 +2,9 @@
 import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
 
-export const PUT = async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const { id } = await params;
+export const PUT = async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+    const id = (await params).id;
+
     try {
         const thread = await prisma.thread.update({
             where: {
